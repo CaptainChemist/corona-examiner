@@ -1,0 +1,88 @@
+stages:
+  - build
+  - test
+  - deploy
+
+build_staging:
+  image: node:lts
+  stage: build
+  script:
+    - npm install
+    - npm run type-check
+    - npm run lint
+    - npm run build
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - node_modules/
+  artifacts:
+    paths:
+      - public
+  except:
+    - master
+    - tags
+
+build_site:
+  image: node:lts
+  stage: build
+  script:
+    - npm install
+    - npm run build
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - node_modules/
+  artifacts:
+    paths:
+      - public
+  only:
+    - master
+    - tags
+
+test_site:
+  image: node:lts
+  stage: test
+  script:
+    - npm run test
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - node_modules/
+
+deploy_staging:
+  image: python:latest
+  stage: deploy
+  script:
+    - pip install awscli
+    - aws s3 sync public/ s3://<DEV_BUCKET_NAME>/ --delete
+  environment:
+    name: staging
+    url: http://<DEV_BUCKET_NAME>
+  except:
+   - master
+   - tags
+
+deploy_QA:
+  image: python:latest
+  stage: deploy
+  script:
+    - pip install awscli
+    - aws s3 sync public/ s3://<QA_BUCKET_NAME>.com/ --delete
+  environment:
+    name: QA
+    url: http://<QA_BUCKET_NAME>
+  only:
+    - master
+
+deploy_production:
+  image: python:latest
+  stage: deploy
+  script:
+    - pip install awscli
+    - aws s3 sync public/ s3://<PROD_BUCKET_NAME>/ --delete
+  environment:
+    name: production
+    url: https://<PROD_BUCKET_NAME>
+  only:
+    - tags
+

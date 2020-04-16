@@ -1,0 +1,80 @@
+{
+  "name": "corona-examiner",
+  "private": true,
+  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "version": "0.1.0",
+  "author": "Stephen Jensen <stephen@codemochi.com>",
+  "dependencies": {
+    "d3-scale": "^3.2.1",
+    "gatsby": "^2.20.12",
+    "gatsby-image": "^2.1.0",
+    "gatsby-plugin-google-tagmanager": "^2.2.1",
+    "gatsby-plugin-manifest": "^2.3.3",
+    "gatsby-plugin-offline": "^2.1.1",
+    "gatsby-plugin-postcss": "^2.2.1",
+    "gatsby-plugin-react-helmet": "^3.0.12",
+    "gatsby-plugin-sharp": "^2.0.37",
+    "gatsby-plugin-typescript": "^2.0.15",
+    "gatsby-source-filesystem": "^2.2.2",
+    "gatsby-transformer-sharp": "^2.1.19",
+    "lodash": "^4.17.15",
+    "polished": "^3.5.1",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-helmet": "^5.2.1",
+    "react-simple-maps": "0.12.1",
+    "react-tooltip": "^4.1.5",
+    "recharts": "^1.8.5"
+  },
+  "devDependencies": {
+    "@types/d3-scale": "^2.2.0",
+    "@types/jest": "^24.0.14",
+    "@types/lodash": "^4.14.149",
+    "@types/node": "^12.0.2",
+    "@types/react": "^16.8.18",
+    "@types/react-dom": "^16.8.4",
+    "@types/react-helmet": "^5.0.8",
+    "@types/react-simple-maps": "^0.12.1",
+    "@types/react-test-renderer": "^16.8.2",
+    "@types/react-tooltip": "^3.11.0",
+    "@types/recharts": "^1.8.9",
+    "@typescript-eslint/eslint-plugin": "^1.10.2",
+    "@typescript-eslint/parser": "^1.10.2",
+    "babel-jest": "^24.8.0",
+    "babel-preset-gatsby": "^0.1.11",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.3.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-react": "^7.13.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^24.8.0",
+    "prettier": "^1.17.1",
+    "react-test-renderer": "^16.8.6",
+    "tailwindcss": "^1.2.0",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.5.2"
+  },
+  "keywords": [
+    "gatsby"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "deploy": "gatsby build --prefix-paths && cp ./src/CNAME public/ && gh-pages -d public",
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "format": "prettier --write src/**/*.{js,jsx}",
+    "start": "npm run develop",
+    "serve": "gatsby serve",
+    "test": "jest",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint **/*.tsx"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CaptainChemist/corona-examiner"
+  },
+  "bugs": {
+    "url": "https://github.com/CaptainChemist/corona-examiner/issues"
+  }
+}

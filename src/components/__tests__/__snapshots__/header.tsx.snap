@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header renders correctly 1`] = `
+<header
+  className="bg-purple-700"
+>
+  <div
+    className="flex flex-wrap items-center justify-between max-w-4xl p-4 mx-auto md:p-8"
+  >
+    <h1
+      className="flex items-center text-white no-underline"
+    >
+      <a
+        href="/"
+      >
+        Default Starter
+      </a>
+    </h1>
+  </div>
+</header>
+`;
