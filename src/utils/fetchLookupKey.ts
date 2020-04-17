@@ -1,6 +1,6 @@
 import { filter } from "lodash"
 
-const rawCollection = [
+export const rawCollection = [
   {
     Province_State: "",
     Country_Region: "Afghanistan",
@@ -1604,8 +1604,6 @@ const rawCollection = [
     Population: "29825968",
   },
 ]
-
-export const foundCountries: {}[] = []
 
 export const lookupKeys = ({
   Province_State,
