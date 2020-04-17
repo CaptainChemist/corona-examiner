@@ -38,7 +38,7 @@ const Layout = (props: LayoutProps) => (
               </p>
               <p className="text-white">
                 Source code available on{" "}
-                <a href="https://github.com/CaptainChemist/covid-comparer">
+                <a href="https://github.com/CaptainChemist/corona-examiner">
                   Github
                 </a>
                 .
