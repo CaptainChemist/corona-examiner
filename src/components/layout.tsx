@@ -30,6 +30,11 @@ const Layout = (props: LayoutProps) => (
                   JHU CSSE
                 </a>
               </p>
+              <p className="text-white">
+                <a href="https://www.codemochi.com/tos/">TOS</a>{" "}
+                <a href="https://www.codemochi.com/privacy-policy/">Privacy</a>{" "}
+                <a href="https://www.codemochi.com/cookie-policy/">Cookie</a>
+              </p>
             </div>
             <div>
               <p className="text-white">
