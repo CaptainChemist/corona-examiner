@@ -1,5 +1,5 @@
 import { csvArray } from "./csvArray"
-import { filter, reduce, forOwn } from "lodash"
+import { filter, reduce, forOwn, cloneDeep } from "lodash"
 import { statsArray } from "../components/global-stats"
 import { lookupKeys } from "./fetchLookupKey"
 
@@ -20,48 +20,54 @@ export const processOneCOVIDTimeSeries = (text: string) => {
     }
   })
 
-  const result = reduce(
-    percentTypes,
-    (percentMemo, percentCurrent) => ({
-      ...percentMemo,
-      [`${percentCurrent}`]: dateArray.map(currentDate =>
-        reduce(
-          casesJSON,
-          (countryMemo, currentCountry) => {
-            const parsedCurrentMetric = parseInt(currentCountry[currentDate])
-            const { iso3, Population } = lookupKeys({
-              Province_State: currentCountry["Province/State"],
-              Country_Region: currentCountry["Country/Region"],
-            })
-            const currentCountryPop = parseInt(Population)
-            const currentMetric =
-              percentCurrent === "CPM"
-                ? currentCountryPop
-                  ? (parsedCurrentMetric / currentCountryPop) * 1000000
-                  : parsedCurrentMetric
-                : parsedCurrentMetric
-            const previousData = countryMemo[iso3]
-            const isoMetric = {}
-            if (iso3 !== "") {
-              if (previousData) {
-                isoMetric[iso3] = currentMetric + previousData
-              } else {
-                isoMetric[iso3] = currentMetric
-              }
-            }
+  const countryPopulationData = {}
 
-            return {
-              ...countryMemo,
-              ...isoMetric,
-              date: currentDate,
-            }
-          },
-          {}
-        )
-      ),
-    }),
-    {}
+  const NORMAL = dateArray.map((currentDate, dateIndex) =>
+    reduce(
+      casesJSON,
+      (countryMemo, currentCountry) => {
+        const parsedCurrentMetric = parseInt(currentCountry[currentDate])
+        const { iso3, Population } = lookupKeys({
+          Province_State: currentCountry["Province/State"],
+          Country_Region: currentCountry["Country/Region"],
+        })
+
+        if (dateIndex === 0) {
+          const prevPopulation = countryPopulationData[iso3] || 0
+          const newPopulation = parseInt(Population) || 0
+          countryPopulationData[iso3] = prevPopulation + newPopulation
+        }
+
+        const previousData = countryMemo[iso3] || 0
+        const isoMetric = {}
+
+        if (iso3 !== "") {
+          if (previousData) {
+            //CPM data we will later divide by the population, for now we aggregaate
+            isoMetric[iso3] = parsedCurrentMetric + previousData
+          } else {
+            isoMetric[iso3] = parsedCurrentMetric
+          }
+        }
+
+        return {
+          ...countryMemo,
+          ...isoMetric,
+          date: currentDate,
+        }
+      },
+      {}
+    )
   )
+  const result = { NORMAL, CPM: cloneDeep(NORMAL) }
+
+  // Now we need to correct the CPM data to divide by the population
+  result.CPM.map(oneDate => {
+    forOwn(countryPopulationData, (population, countryKey) => {
+      oneDate[countryKey] = (oneDate[countryKey] / population) * 1000000
+    })
+  })
+
   return result
 }
 

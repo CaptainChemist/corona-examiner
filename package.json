@@ -6,6 +6,7 @@
   "author": "Stephen Jensen <stephen@codemochi.com>",
   "dependencies": {
     "d3-scale": "^3.2.1",
+    "dotenv": "^8.2.0",
     "gatsby": "^2.20.12",
     "gatsby-image": "^2.1.0",
     "gatsby-plugin-google-tagmanager": "^2.2.1",

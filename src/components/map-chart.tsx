@@ -1,4 +1,5 @@
-import { filter, get } from "lodash"
+import { filter } from "lodash"
+import { darken, lighten } from "polished"
 import * as React from "react"
 import {
   ComposableMap,
@@ -7,17 +8,15 @@ import {
   ZoomableGroup,
 } from "react-simple-maps"
 import ReactTooltip from "react-tooltip"
-import { darken } from "polished"
-
-import { foundCountries, lookupKeyByISO } from "../utils/fetchLookupKey"
 
 import {
-  colorMap,
-  selectColor,
   baseColor,
+  colorMap,
   defaultColor,
+  selectColor,
   strokeColor,
 } from "../utils/colorMap"
+import { lookupKeyByISO } from "../utils/fetchLookupKey"
 import { CountryMap } from "../utils/types"
 
 const geoUrl =
@@ -128,7 +127,7 @@ const MapChart = ({
             </Geographies>
           </ZoomableGroup>
         </ComposableMap>
-        <ReactTooltip />
+        <ReactTooltip backgroundColor={baseColor} />
       </div>
     </>
   )

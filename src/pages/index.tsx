@@ -40,7 +40,7 @@ const IndexPage = () => {
   }
   return (
     <Layout>
-      <SEO title="Home" />
+      <SEO title="Corona Examiner" />
       <div className="flex mb-4">
         <MapChart
           setTooltipContent={setTooltipContent}

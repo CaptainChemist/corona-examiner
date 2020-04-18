@@ -2,7 +2,7 @@
 
 This is a Gatsby.js based web application for tracking the prevalence and spread of COVID-19 across the globe. It pulls from [Johns Hopkins CSSE Github](https://github.com/CSSEGISandData/COVID-19) which gets updated every 15 minutes with updated data.
 
-This website can be viewed online at [https://coronaexaminer.codemochi.com](https://coronaexaminer.codemochi.com).
+This website can be viewed online at [https://coronaexaminer.codemochi.com](https://coronaexaminer.codemochi.com) and was created by Stephen Jensen at [Codemochi](https://codemochi.com).
 
 **Instructions for running locally**
 
