@@ -1612,7 +1612,14 @@ export const lookupKeys = ({
   Province_State: string
   Country_Region: string
 }) => {
-  return filter(rawCollection, { Province_State, Country_Region })[0]
+  return (
+    filter(rawCollection, { Province_State, Country_Region })[0] || {
+      Province_State: "",
+      Country_Region: "",
+      iso3: "",
+      Population: "0",
+    }
+  )
 }
 
 export const lookupKeyByISO = (iso3: string) => {
